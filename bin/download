@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-curl -o test.txt https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main/configs/test.txt

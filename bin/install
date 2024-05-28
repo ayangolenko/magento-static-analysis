@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+#import ENV variables
+source curl -s "${FULL_REPO_URL}/bin/export-env" | bash
+
+# Function to ask user for installation and download config
+install() {
+    local tool_name=$1
+    local tool_package=$2
+    local config_url=$3
+
+    while true; do
+        read -p "Do you want to install $(echo -e "${GREEN}""$tool_name""${NO_COLOR}")? (y/n): " yn
+        case $yn in
+            [Yy]* )
+                echo "Installing $tool_name..."
+                composer require --dev "$tool_package"
+                if [[ ! -z "$config_url" ]]; then
+                    config_file=$(basename "$config_url")
+                    echo "Downloading configuration for $tool_name..."
+                    curl -sS -o "$config_file" "$config_url"
+                fi
+                break;;
+            [Nn]* )
+                break;;
+            * )
+                echo "Please answer yes or no."
+                ;;
+        esac
+    done
+}
+
+# Check if composer is installed
+curl -s "${FULL_REPO_URL}/composer-validation" | bash
+
+# Define tools array with values: human-readable name, package name, config URL
+tools=(
+    "$PHPCS_NAME:$PHPCS_PACKAGE:$PHPCS_CONFIG_URL"
+    "$PHPMD_NAME:$PHPMD_PACKAGE:$PHPMD_CONFIG_URL"
+    "$PHPCSFIXER_NAME:$PHPCSFIXER_PACKAGE:$PHPCSFIXER_CONFIG_URL"
+    "$PHPSTAN_NAME:$PHPSTAN_PACKAGE:$PHPSTAN_CONFIG_URL"
+)
+
+# Loop through tools array and call install for each tool
+for tool in "${tools[@]}"; do
+    IFS=":" read -r name package url <<< "$tool"
+    install "$name" "$package" "$url"
+done
