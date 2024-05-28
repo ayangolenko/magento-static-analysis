@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="PHPMD rule set"
+         xmlns="https://phpmd.org/xml/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://phpmd.org/xml/ruleset/1.0.0 http://phpmd.org/xml/ruleset_xml_schema_1.0.0.xsd"
+         xsi:noNamespaceSchemaLocation="http://phpmd.org/xml/ruleset_xml_schema_1.0.0.xsd">
+</ruleset>
