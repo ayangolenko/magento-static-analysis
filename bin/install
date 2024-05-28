@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ENV variables
-FULL_REPO_URL="https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main"
+FULL_REPO_URL="https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main/bin/install"
 
 CONFIG_DIR_NAME=config
 
@@ -35,7 +35,7 @@ install() {
     local config_url=$3
 
     while true; do
-            read -p "Do you want to install $(echo -e "${GREEN}""$tool_name""${NO_COLOR}") ? (y/n): " yn
+            read -p "Do you want to install $(echo -e "${GREEN}""$tool_name""${NO_COLOR}") ? (y/n): " yn < /dev/tty
             case $yn in
                 [Yy]* )
                     echo -e "Installing ${GREEN}$tool_name${NC}..."
