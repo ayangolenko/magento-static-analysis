@@ -10,24 +10,27 @@ install() {
     local config_url=$3
 
     while true; do
-        read -p "Do you want to install $(echo -e "${GREEN}""$tool_name""${NO_COLOR}")? (y/n): " yn
-        case $yn in
-            [Yy]* )
-                echo "Installing $tool_name..."
-                composer require --dev "$tool_package"
-                if [[ ! -z "$config_url" ]]; then
-                    config_file=$(basename "$config_url")
-                    echo "Downloading configuration for $tool_name..."
-                    curl -sS -o "$config_file" "$config_url"
-                fi
-                break;;
-            [Nn]* )
-                break;;
-            * )
-                echo "Please answer yes or no."
-                ;;
-        esac
-    done
+            read -p "Do you want to install $(echo -e ${GREEN}$tool_name${NC})? (y/n): " yn
+            case $yn in
+                [Yy]* )
+                    echo -e "Installing ${GREEN}$tool_name${NC}..."
+                    composer require --dev $tool
+                    if [[ -n "$config_url" ]]; then
+                        config_file=$(basename "$config_url")
+                        echo -e "Downloading configuration for ${GREEN}$tool_name${NC}..."
+                        curl -sS -o "$config_file" "$config_url"
+                    fi
+                    break
+                    ;;
+                [Nn]* )
+                    echo -e "Skipping ${GREEN}$tool_name${NC}\n"
+                    break
+                    ;;
+                * )
+                    echo "Please answer yes or no."
+                    ;;
+            esac
+        done
 }
 
 # Check if composer is installed
@@ -44,5 +47,9 @@ tools=(
 # Loop through tools array and call install for each tool
 for tool in "${tools[@]}"; do
     IFS=":" read -r name package url <<< "$tool"
+    if [[ -z "$name" || -z "$package" ]]; then
+        echo "Skipping invalid entry: $tool"
+        continue
+    fi
     install "$name" "$package" "$url"
 done
