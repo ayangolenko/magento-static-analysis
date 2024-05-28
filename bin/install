@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ENV variables
-FULL_REPO_URL="https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main/bin/install"
+FULL_REPO_URL="https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main"
 
 CONFIG_DIR_NAME=config
 
@@ -43,7 +43,6 @@ install() {
                     if [[ -n "$config_url" ]]; then
                         config_file=$(basename "$config_url")
                         echo -e "Downloading configuration for $tool_name..."
-                        echo -e "$config_file:$config_url"
                         curl -sS -o "$config_file" "$config_url"
                     fi
                     break
