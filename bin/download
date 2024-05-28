@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-curl -s https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main/test.txt ./test/ | bash
+curl -s https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main/config/test.txt ./test/ | bash
