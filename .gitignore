@@ -1,0 +1,14 @@
+#exclude all
+*
+
+#included directories
+!./bin
+!./bin/**
+!./config
+!./config/**
+
+#included files
+!./.env
+!./LICENSE
+!./README.md
+
