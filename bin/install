@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+#declare repo URL variable
+FULL_REPO_URL="https://raw.githubusercontent.com/ayangolenko/magento-static-analyzers/main"
+
 #import ENV variables
-source curl -s "${FULL_REPO_URL}/bin/export-env" | bash
+source curl -s "${FULL_REPO_URL}/bin/export-variable" | bash
 
 # Function to ask user for installation and download config
 install() {
@@ -14,7 +17,7 @@ install() {
             case $yn in
                 [Yy]* )
                     echo -e "Installing ${GREEN}$tool_name${NC}..."
-                    composer require --dev $tool
+                    composer require --dev $tool_package
                     if [[ -n "$config_url" ]]; then
                         config_file=$(basename "$config_url")
                         echo -e "Downloading configuration for ${GREEN}$tool_name${NC}..."
@@ -34,7 +37,11 @@ install() {
 }
 
 # Check if composer is installed
-curl -s "${FULL_REPO_URL}/composer-validation" | bash
+if ! command -v composer &> /dev/null
+then
+    echo "Composer could not be found. Please install Composer first."
+    exit 1
+fi
 
 # Define tools array with values: human-readable name, package name, config URL
 tools=(

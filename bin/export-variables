@@ -1,0 +1,25 @@
+#!/bin/bash
+
+export CONFIG_DIR_NAME=config
+
+#Colors
+export GREEN="\033[0;32m"
+export NO_COLOR="\033[0m"
+
+#Analyzers Name
+export PHPCS_NAME="PHP CodeSniffer (phpcs)"
+export PHPMD_NAME="PHP Mess Detector (phpmd)"
+export PHPCSFIXER_NAME="PHP Coding Standards Fixer (php-cs-fixer)"
+export PHPSTAN_NAME="PHPStan"
+
+#Analyzers Composer Package Name
+export PHPCS_PACKAGE=squizlabs/php_codesniffer
+export PHPMD_PACKAGE=phpmd/phpmd
+export PHPCSFIXER_PACKAGE=friendsofphp/php-cs-fixer
+export PHPSTAN_PACKAGE=phpstan/phpstan
+
+#Analyzers Config URL
+export PHPCS_CONFIG_URL="$FULL_REPO_URL/$CONFIG_DIR_NAME/phpcs/.phpcs.xml"
+export PHPMD_CONFIG_URL="$FULL_REPO_URL/$CONFIG_DIR_NAME/phpmd/ruleset.xml"
+export PHPCSFIXER_CONFIG_URL="$FULL_REPO_URL/$CONFIG_DIR_NAME/php-cs-fixer/.php-cs-fixer.php"
+export PHPSTAN_CONFIG_URL="$FULL_REPO_URL/$CONFIG_DIR_NAME/phpstan/phpstan.neon"
