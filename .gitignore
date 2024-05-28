@@ -8,7 +8,6 @@
 !./config/**
 
 #included files
-!./.env
 !./LICENSE
 !./README.md
 
